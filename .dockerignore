@@ -1,0 +1,9 @@
+.dockerignore
+Dockerfile
+npm-debug.log
+.git
+.gitignore
+.gcloudignore
+
+# Node.js dependencies:
+node_modules/

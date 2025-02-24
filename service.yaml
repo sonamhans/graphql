@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: graphql
+spec:
+  template:
+    spec:
+      containers:
+        - image: us-central1-docker.pkg.dev/velvety-glazing-451914-d8/demo-project/graphql:01
+          ports:
+            - name: http1
+              containerPort: 4000
