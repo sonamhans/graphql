@@ -4,11 +4,10 @@ const path = require('path');
 const fetch = require("node-fetch");
 const DataLoader = require("dataloader");
 
-
 const resolvers = {
     Query: {
         getStudent: () => {
-            return fetch('https://student-service-336889241202.us-central1.run.app/students').then(function (response) {
+            return fetch('http://localhost:9090/students').then(function (response) {
                 if (response.ok) {
                     return response.json()
                 } else {
@@ -18,7 +17,7 @@ const resolvers = {
         },
 
         getClassroom: () => {
-            return fetch(`https://classroom-service-336889241202.us-central1.run.app/classrooms`).then(function (response) {
+            return fetch(`http://localhost:9092/classrooms`).then(function (response) {
                 if (response.ok) {
                     return response.json()
                 } else {
@@ -28,7 +27,7 @@ const resolvers = {
         },
 
         getTeacher: () => {
-              return fetch(`https://teacher-service-336889241202.us-central1.run.app/teachers`).then(function (response) {
+              return fetch(`http://localhost:9091/teachers`).then(function (response) {
                   if (response.ok) {
                       return response.json()
                   } else {
@@ -40,7 +39,7 @@ const resolvers = {
         getStudentById: (parent, args) => {
             const { id } = args
 
-            return fetch(`https://student-service-336889241202.us-central1.run.app/student/${id}`).then(function (response) {
+            return fetch(`http://localhost:9090/student/${id}`).then(function (response) {
                 if (response.ok) {
                     return response.json();
                 } else {
@@ -52,7 +51,7 @@ const resolvers = {
         getClassroomById: (parent, args) => {
             const { id } = args
 
-            return fetch(`https://classroom-service-336889241202.us-central1.run.app/classroom/${id}`).then(function (response) {
+            return fetch(`http://localhost:9092/classroom/${id}`).then(function (response) {
                 if (response.ok) {
                     return response.json();
                 } else {
@@ -64,7 +63,7 @@ const resolvers = {
         getTeacherById: (parent, args) => {
             const { id } = args
 
-            return fetch(`https://teacher-service-336889241202.us-central1.run.app/teacher/${id}`).then(function (response) {
+            return fetch(`http://localhost:9091/teacher/${id}`).then(function (response) {
                 if (response.ok) {
                     return response.json();
                 } else {
@@ -77,7 +76,7 @@ const resolvers = {
             const dto = {
                 ids: args.ids
             }
-            return fetch(`https://classroom-service-336889241202.us-central1.run.app/classroom/find-by-ids`,
+            return fetch(`http://localhost:9092/classroom/find-by-ids`,
                 { method: 'POST', body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' } }
             ).then(res => res.json())
         },
@@ -86,7 +85,7 @@ const resolvers = {
             const dto = {
                 ids: args.ids
             }
-            return fetch(`https://teacher-service-336889241202.us-central1.run.app/teacher/find-by-ids`,
+            return fetch(`http://localhost:9091/teacher/find-by-ids`,
                 { method: 'POST', body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' } }
             ).then(res => res.json())
         },
@@ -127,14 +126,14 @@ const resolvers = {
                 classroomId: args.classroomId
             }
 
-            return fetch(`https://student-service-336889241202.us-central1.run.app/student`, {
+            return fetch(`http://localhost:9090/student`, {
                 method: 'POST', body: JSON.stringify(student), headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
         },
 
         updateStudent: (parent, args) => {
             let id = args.id
-            return fetch(`https://student-service-336889241202.us-central1.run.app/student/${id}`, {
+            return fetch(`http://localhost:9090/student/${id}`, {
                 method: 'PUT', body: JSON.stringify(args), headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
         },
@@ -147,14 +146,14 @@ const resolvers = {
                 teacherId: args.teacherId
             }
 
-            return fetch(`https://classroom-service-336889241202.us-central1.run.app/classroom`, {
+            return fetch(`http://localhost:9092/classroom`, {
                 method: 'POST', body: JSON.stringify(classroom), headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
         },
 
         updateClassroom: (parent, args) => {
             let id = args.id
-            return fetch(`https://classroom-service-336889241202.us-central1.run.app/classroom/${id}`, {
+            return fetch(`http://localhost:9092/classroom/${id}`, {
                 method: 'PUT', body: JSON.stringify(args), headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
         },
@@ -166,7 +165,7 @@ const resolvers = {
                 lastName: args.lastName
             }
 
-            return fetch(`https://teacher-service-336889241202.us-central1.run.app/teacher`, {
+            return fetch(`http://localhost:9091/teacher`, {
                 method: 'POST', body: JSON.stringify(teacher), headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
         },
@@ -174,24 +173,24 @@ const resolvers = {
         updateTeacher: (parent, args) => {
             let id = args.id
             console.log(id)
-            return fetch(`https://teacher-service-336889241202.us-central1.run.app/teacher/${id}`, {
+            return fetch(`http://localhost:9091/teacher/${id}`, {
                 method: 'PUT', body: JSON.stringify(args), headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
         },
 
         deleteStudent: (parent, args) => {
             const { id } = args
-            return fetch(`https://student-service-336889241202.us-central1.run.app/student/${id}`, { method: 'DELETE' }).then(res => res.json())
+            return fetch(`http://localhost:9090/student/${id}`, { method: 'DELETE' }).then(res => res.json())
         },
 
         deleteClassroom: (parent, args) => {
             const { id } = args
-            return fetch(`https://classroom-service-336889241202.us-central1.run.app/classroom/${id}`, { method: 'DELETE' }).then(res => res.json())
+            return fetch(`http://localhost:9092/classroom/${id}`, { method: 'DELETE' }).then(res => res.json())
         },
 
         deleteTeacher: (parent, args) => {
             const { id } = args
-            return fetch(`https://teacher-service-336889241202.us-central1.run.app/teacher/${id}`, { method: 'DELETE' }).then(res => res.json())
+            return fetch(`http://localhost:9091/teacher/${id}`, { method: 'DELETE' }).then(res => res.json())
         },
     },
 };
@@ -202,7 +201,7 @@ const loaderStudent = {
             ids: ids
         }
 
-        const rows = await fetch(`https://classroom-service-336889241202.us-central1.run.app/classroom/find-by-ids`,
+        const rows = await fetch(`http://localhost:9092/classroom/find-by-ids`,
             { method: 'POST', body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' } }
         ).then(res => res.json())
 console.log(rows);
@@ -222,7 +221,7 @@ const loaderClassroom = {
         const dto = {
             ids: ids
         }
-        const rows = await fetch(`https://teacher-service-336889241202.us-central1.run.app/teacher/find-by-ids`,
+        const rows = await fetch(`http://localhost:9091/teacher/find-by-ids`,
             { method: 'POST', body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' } }
         ).then(res => res.json())
 
@@ -242,7 +241,7 @@ const loaderTeacher = {
         const dto = {
             ids: ids
         }
-        const rows = await fetch(`https://classroom-service-336889241202.us-central1.run.app/classroom/find-by-ids`,
+        const rows = await fetch(`http://localhost:9092/classroom/find-by-ids`,
             { method: 'POST', body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' } }
         ).then(res => res.json())
 
