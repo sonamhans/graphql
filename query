@@ -30,7 +30,7 @@
 ### get classroom by id
 #query{getClassroomById(id: 1){name, code, teacher{firstName, lastName}}}
 
-### get stundet by id
+### get student by id
 #query{getStudentById(id:1){name, classroom{name, teacher{firstName}}}}
 
 ### get classroom by ids

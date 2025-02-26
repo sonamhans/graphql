@@ -27,7 +27,7 @@ type Student {
     age: Int!
     email: String!
     classroomId: Int!
-    classroom: Classroom!
+    classroom: Classroom
 }
 
 type Classroom {
